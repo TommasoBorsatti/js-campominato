@@ -20,8 +20,6 @@ function randomizer(numeroMin, numeroMax) {
   return Math.floor(Math.random()* (numeroMax - numeroMin + 1) + numeroMin);
 }
 
-
-
 // PROGRAMMA
 
 // VARIABILI DICHIARATE
@@ -97,6 +95,7 @@ while (j < (totaleNumeri - totaleNumeriBomba) && !numeriBomba.includes(numeroUte
 // Comunicazione del punteggio.
 punteggio = j;
 console.log("hai totalizzato " + punteggio + " punti!")
+alert("hai totalizzato " + punteggio + " punti!")
 
 // Commento al punteggio.
 if (punteggio < (totaleNumeri - totaleNumeriBomba) * 0.25) {
