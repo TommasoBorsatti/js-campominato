@@ -59,6 +59,9 @@ while (j < 10 && !numeriBomba.includes(numeroUtente)) {
   // ciclo while che controlla che non si stia barando inserendo numeri già inseriti; il confronto avviene con il contenuto dell'array NumeriUsati.
   while (numeriUsati.includes(numeroUtente)) {
     numeroUtente = parseInt(prompt("Abbiamo un furbacchione qui...Per favore, inserisci solo numeri che non hai già inserito -_- "));
+    while (isNaN(numeroUtente) || numeroUtente >=100 || numeroUtente <= 0 ) {
+      numeroUtente = parseInt(prompt("Hei! Il valore inserito deve essere un numero e non può essere minore di 1 o maggiore di 100!"));
+    }
   }
   //aggiungo il numero usato all'array numeriUsati per il controllo sulle future iterazioni. Poi aumento il contatore j.
   numeriUsati.push(numeroUtente);
