@@ -24,19 +24,33 @@ function randomizer(numeroMin, numeroMax) {
 
 // PROGRAMMA
 
-//1. Creo un array casuale di 16 numeri vietati presi tra 1 e 100, usando la funzione Randomizer.
+//1. Creo un array casuale di 16 numeri vietati (numeri bomba) presi tra 1 e 100, usando la funzione Randomizer.
 // Per farlo ripeto l'uso della funzione per 16 volte usando un ciclo For.
 //I numeri dell'array non possono essere uguali tra loro:
 
 var numeriBomba = [];
 var i = 0;
+var punteggio = 0;
 
 for (var i = 0; i < 16; i++) {
-  var numeroRandom = randomizer(1,100);
+  var numeroRandom = randomizer(1,50);
   while (numeriBomba.includes(numeroRandom)) {
-    numeroRandom = randomizer(1, 100);
+    numeroRandom = randomizer(1, 50);
   }
   numeriBomba.push(numeroRandom);
 }
 
-console.log(numeriBomba);
+console.log("numeri bomba: " + numeriBomba);
+
+//2. Chiedo all'utente di inserire in prompt il totale dei numeri richiesto;
+// Il tutto avviene in un ciclo while.
+
+var numeroUtente = 0;
+var j = 0;
+while (j < 10 && !numeriBomba.includes((numeroUtente))) {
+  numeroUtente = parseInt(prompt("inserisci qui un numero intero compreso tra 1 e 100"));
+  j++;
+  console.log("inserito il " + numeroUtente);
+}
+punteggio = j;
+console.log("hai totalizzato " + punteggio + " punti!")
