@@ -47,10 +47,35 @@ console.log("numeri bomba: " + numeriBomba);
 
 var numeroUtente = 0;
 var j = 0;
-while (j < 10 && !numeriBomba.includes((numeroUtente))) {
+var numeriUsati = [];
+
+// ciclo che si interrompe al decimo prompt o appena l utente inserisce un numero vietato.
+while (j < 10 && !numeriBomba.includes(numeroUtente)) {
   numeroUtente = parseInt(prompt("inserisci qui un numero intero compreso tra 1 e 100"));
+  //ciclo while che blocca il programma e il conteggio dei numeri se si inserisce o un NaN o un numero <= 0 o un numero superiore a 100.
+  while (isNaN(numeroUtente) || numeroUtente >=100 || numeroUtente <= 0 ) {
+    numeroUtente = parseInt(prompt("Hei! Il valore inserito deve essere un numero e non può essere minore di 1 o maggiore di 100!"));
+  }
+  // ciclo while che controlla che non si stia barando inserendo numeri già inseriti; il confronto avviene con il contenuto dell'array NumeriUsati.
+  while (numeriUsati.includes(numeroUtente)) {
+    numeroUtente = parseInt(prompt("Abbiamo un furbacchione qui...Per favore, inserisci solo numeri che non hai già inserito -_- "));
+  }
+  //aggiungo il numero usato all'array numeriUsati per il controllo sulle future iterazioni. Poi aumento il contatore j.
+  numeriUsati.push(numeroUtente);
   j++;
+  //Stampa dei numeri usati come reminder all'utente:
   console.log("inserito il " + numeroUtente);
 }
+
+// Comunicazione del punteggio.
 punteggio = j;
 console.log("hai totalizzato " + punteggio + " punti!")
+
+// Commento al punteggio.
+if (punteggio < 2) {
+  console.log("Hai totalizzato un punteggio basso; ritenta, sarai più fortunato.")
+} else if (punteggio == 10) {
+  console.log("INCREDIBILE! Hai totalizzato il massimo dei punti!!!")
+} else {
+  console.log("Un ottimo punteggio...Ma puoi migliorare.")
+}
