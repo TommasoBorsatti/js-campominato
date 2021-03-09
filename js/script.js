@@ -61,9 +61,9 @@ if (difficulty == "facile") {
 
 
 for (var i = 0; i < totaleNumeriBomba; i++) {
-  numeroRandom = randomizer(1,100);
+  numeroRandom = randomizer(1, totaleNumeri);
   while (numeriBomba.includes(numeroRandom)) {
-    numeroRandom = randomizer(1, 100);
+    numeroRandom = randomizer(1, totaleNumeri);
   }
   numeriBomba.push(numeroRandom);
 }
@@ -101,8 +101,11 @@ console.log("hai totalizzato " + punteggio + " punti!")
 // Commento al punteggio.
 if (punteggio < (totaleNumeri - totaleNumeriBomba) * 0.25) {
   console.log("Hai totalizzato un punteggio basso; ritenta, sarai più fortunato.")
+  alert("Hai totalizzato un punteggio basso; ritenta, sarai più fortunato.")
 } else if (punteggio == totaleNumeri - totaleNumeriBomba) {
   console.log("INCREDIBILE! Hai totalizzato il massimo dei punti!!!")
+  alert("INCREDIBILE! Hai totalizzato il massimo dei punti!!!")
 } else {
   console.log("Un ottimo punteggio...Ma puoi sempre migliorare.")
+  alert("Un ottimo punteggio...Ma puoi sempre migliorare.")
 }
