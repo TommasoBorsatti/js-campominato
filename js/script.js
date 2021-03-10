@@ -96,6 +96,7 @@ while (numeriValidi.length < totaleNumeri - totaleBombe && esploso == false) {
   if (inArray(bombe, numeroUtente)) {
     esploso = true;
     alert("BOOM! Sei saltato in aria e la tua partita termina qui.")
+    console.log("Boom! Il numero " + numeroUtente + " era una bomba!")
   } else {
     numeriValidi.push(numeroUtente);
     //stampo il numero per controllo.
