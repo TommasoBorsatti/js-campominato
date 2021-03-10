@@ -33,6 +33,7 @@ var totaleNumeri = 0;
 var numeroUtente = 0;
 var numeriUsati = [];
 var punteggio = 0;
+var difficulty = 0;
 
 //0. Selettore di difficoltà: in base alla scelta operata su un prompt, l'utente imposta la difficoltà.
 // La scelta è resa possibile, modificando l'entità delle variabili dichiarate, con una condizione if.
@@ -41,7 +42,7 @@ alert("Salve giocatore! Sei pronto a giocare al CAMPO MINATO??? Ti chiederò di 
 
 //validazione della scelta eseguita:
 do {
-  var difficulty = prompt("Digita: facile, medio, o difficile").toLowerCase() ;
+  difficulty = prompt("Digita: facile, medio, o difficile").toLowerCase() ;
 } while (difficulty != "facile" && difficulty != "medio" && difficulty != "difficile" || !isNaN(difficulty));
 
 if (difficulty == "facile") {
