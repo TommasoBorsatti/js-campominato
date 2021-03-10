@@ -108,8 +108,8 @@ while (numeriValidi.length < totaleNumeri - totaleBombe && esploso == false) {
 
 var punteggio = numeriValidi.length;
 
-alert("Hai totalizzato " + punteggio + " punti.")
-console.log("Hai totalizzato " + punteggio + " punti.")
+alert("Il tuo punteggio finale è " + punteggio)
+console.log("Il tuo punteggio finale è " + punteggio )
 console.log("I numeri che hai scelto sono stati: " + numeriValidi)
 
 // uso un else if per i commenti al punteggio.
