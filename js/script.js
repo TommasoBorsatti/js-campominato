@@ -92,7 +92,7 @@ while (numeriValidi.length < totaleNumeri - totaleBombe && esploso == false) {
   if (numeroUtente <= 0 || numeroUtente > totaleNumeri || isNaN(numeroUtente)) {
     alert("Attenzione: inserisci solo un valore numerico compreso tra 1 e " + totaleNumeri);
   }
-  // terzo controllo: se il numero rientra nell'array Bombe, la booleana Esploso da falso e il ciclo termina; ALTRIMENTI il numero è pushato nell'array Numeri Validi.
+  // terzo controllo: se il numero rientra nell'array Bombe, la booleana Esploso da vero e il ciclo termina; ALTRIMENTI il numero è pushato nell'array Numeri Validi.
   if (inArray(bombe, numeroUtente)) {
     esploso = true;
     alert("BOOM! Sei saltato in aria e la tua partita termina qui.")
