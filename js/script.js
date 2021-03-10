@@ -46,7 +46,7 @@ function inArray (array, elemento) {
 
 do {
   difficulty = prompt("Scegli la tua difficoltà: facile, medio o difficile.").toLowerCase();
-} while (difficulty != "facile" && difficulty != "medio" && difficulty != "difficile" || !isNaN(difficulty));
+} while (difficulty != "facile" && difficulty != "medio" && difficulty != "difficile");
 
 switch (difficulty) {
   case "facile":
