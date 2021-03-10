@@ -13,96 +13,110 @@
 // con difficoltà 1 => tra 1 e 80
 // con difficoltà 2 => tra 1 e 50
 
+// DEFINISCO VARIABILI GLOBALI
+
+var totaleNumeri = 0;
+var totaleBombe = 16;
+var difficulty = 0;
+var bombe = [];
+var numeriValidi = [];
+var numeroUtente = 0;
+
+
 //FUNZIONI
 
-//Funzione per generare un intero random tra due estremi compresi.
-function randomizer(numeroMin, numeroMax) {
-  return Math.floor(Math.random()* (numeroMax - numeroMin + 1) + numeroMin);
+//questa funzione sarà usata per generare i numeri casuali dell'array Bombe, nei vari livelli di difficoltà scelti:
+function randomizer (numeroMin, numeroMax) {
+  return Math.floor(Math.random() * (numeroMax - numeroMin + 1 ) + numeroMin);
 }
 
-// PROGRAMMA
-
-// VARIABILI DICHIARATE
-
-var i = 0;
-var j = 0;
-var totaleNumeriBomba = 16;
-var numeroRandom = 0;
-var numeriBomba = [];
-var totaleNumeri = 0;
-var numeroUtente = 0;
-var numeriUsati = [];
-var punteggio = 0;
-var difficulty = 0;
-
-//0. Selettore di difficoltà: in base alla scelta operata su un prompt, l'utente imposta la difficoltà.
-// La scelta è resa possibile, modificando l'entità delle variabili dichiarate, con una condizione if.
-
-alert("Salve giocatore! Sei pronto a giocare al CAMPO MINATO??? Ti chiederò di inserire dei numeri uno di fila all'altro, compresi tra due estremi. Il computer sceglie 16 numeri random e li trasforma in numeri bomba: se scegli uno di quei numeri, esplodi e il gioco finisce. Adesso scegli uno fra 3 livelli difficoltà: Facile (100 numeri) / Medio (80 numeri) / Difficile (50 numeri).");
-
-//validazione della scelta eseguita:
-do {
-  difficulty = prompt("Digita: facile, medio, o difficile").toLowerCase() ;
-} while (difficulty != "facile" && difficulty != "medio" && difficulty != "difficile" || !isNaN(difficulty));
-
-if (difficulty == "facile") {
-  totaleNumeri = 100;
-} else if (difficulty == "medio") {
-  totaleNumeri = 80;
-} else {
-  totaleNumeri = 50;
-}
-
-
-//1. Creo un array casuale di 16 numeri vietati (numeri bomba) presi tra 1 e 100, usando la funzione Randomizer.
-// Per farlo ripeto l'uso della funzione per 16 volte usando un ciclo For.
-//I numeri dell'array non possono essere uguali tra loro:
-
-
-for (var i = 0; i < totaleNumeriBomba; i++) {
-  numeroRandom = randomizer(1, totaleNumeri);
-  while (numeriBomba.includes(numeroRandom)) {
-    numeroRandom = randomizer(1, totaleNumeri);
-  }
-  numeriBomba.push(numeroRandom);
-}
-
-console.log("numeri bomba: " + numeriBomba);
-
-//2. Chiedo all'utente di inserire in prompt il totale dei numeri richiesto;
-// Il tutto avviene in un ciclo while.
-
-// ciclo che si interrompe al decimo prompt o appena l utente inserisce un numero vietato.
-while (j < (totaleNumeri - totaleNumeriBomba) && !numeriBomba.includes(numeroUtente)) {
-  numeroUtente = parseInt(prompt("inserisci qui un numero intero compreso tra 1 e " + totaleNumeri));
-  //ciclo while che blocca il programma e il conteggio dei numeri se si inserisce o un NaN o un numero <= 0 o un numero superiore a 100.
-  while (isNaN(numeroUtente) || numeroUtente > totaleNumeri || numeroUtente <= 0 ) {
-    numeroUtente = parseInt(prompt("Hei! Il valore inserito deve essere un numero e non può essere minore di 1 o maggiore di " + totaleNumeri));
-  }
-  // ciclo while che controlla che non si stia barando inserendo numeri già inseriti; il confronto avviene con il contenuto dell'array NumeriUsati.
-  while (numeriUsati.includes(numeroUtente)) {
-    numeroUtente = parseInt(prompt("Abbiamo un furbacchione qui...Per favore, inserisci solo numeri che non hai già inserito -_- "));
-    while (isNaN(numeroUtente) || numeroUtente > totaleNumeri || numeroUtente <= 0 ) {
-      numeroUtente = parseInt(prompt("Hei! Il valore inserito deve essere un numero e non può essere minore di 1 o maggiore di " + totaleNumeri));
+//questa funzione servirà per capire se un elemento scelto è presente in un array (come una sorta di metodo .includes):
+function inArray (array, elemento) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] == elemento) {
+      return true;
     }
   }
-  //aggiungo il numero usato all'array numeriUsati per il controllo sulle future iterazioni. Poi aumento il contatore j.
-  numeriUsati.push(numeroUtente);
-  j++;
-  //Stampa dei numeri usati come reminder all'utente:
-  console.log("inserito il " + numeroUtente);
+  return false;
 }
 
-// Comunicazione del punteggio.
-punteggio = j;
-console.log("hai totalizzato " + punteggio + " punti!")
-alert("hai totalizzato " + punteggio + " punti!")
+//PROGRAMMA
 
-// Commento al punteggio.
-if (punteggio < (totaleNumeri - totaleNumeriBomba) * 0.25) {
+// 1. definisco difficulty; uso uno switch.
+
+do {
+  difficulty = prompt("Scegli la tua difficoltà: facile, medio o difficile.").toLowerCase();
+} while (difficulty != "facile" && difficulty != "medio" && difficulty != "difficile" || !isNaN(difficulty));
+
+switch (difficulty) {
+  case "facile":
+    totaleNumeri = 100;
+    break;
+  case "medio":
+    totaleNumeri = 80;
+    break;
+  case "difficile":
+    totaleNumeri = 50;
+    break;
+}
+
+// 2. vado a definire i numeri che compongono l'array Bombe con la funzione Randomizer:
+
+var i = 0;
+var numeroRandom;
+
+while (i < totaleBombe) {
+  numeroRandom = randomizer(1, totaleNumeri);
+  if (inArray(bombe, numeroRandom )) {
+  } else {
+    bombe.push(numeroRandom);
+    i++
+  }
+}
+
+// stampo le bombe per controllo nel console log
+console.log("Se vuoi barare e vedere i numeri bomba, li trovi qui: " + bombe);
+
+// 3. creo il cuore del programma usando un ciclo while con tre condizioni if di controllo successive.
+
+var esploso = false;
+
+// ciclo che dura in base alla length dei numwri inseriti, confrontata al massimo raggiungibile E fintanto che la booleana Esploso è falsa.
+while (numeriValidi.length < totaleNumeri - totaleBombe && esploso == false) {
+  numeroUtente = parseInt(prompt("Inserisci un numero compreso tra 1 e " + totaleNumeri));
+  // primo controllo: se il numero inserito è uguale a un numero già usato, questo non viene pushato nell'array Numeri Validi.
+  if (inArray(numeriValidi, numeroUtente)) {
+    alert("Non fare il furbo: inserisci solo numeri che non hai già inserito.");
+  }
+  // secondo controllo: se il numero non rientra nei parametri accettati o è un NaN, questo non viene pushato nell'array Numeri Validi.
+  if (numeroUtente <= 0 || numeroUtente > totaleNumeri || isNaN(numeroUtente)) {
+    alert("Attenzione: inserisci solo un valore numerico compreso tra 1 e " + totaleNumeri);
+  }
+  // terzo controllo: se il numero rientra nell'array Bombe, la booleana Esploso da falso e il ciclo termina; ALTRIMENTI il numero è pushato nell'array Numeri Validi.
+  if (inArray(bombe, numeroUtente)) {
+    esploso = true;
+    alert("BOOM! Sei saltato in aria e la tua partita termina qui.")
+  } else {
+    numeriValidi.push(numeroUtente);
+    //stampo il numero per controllo.
+    console.log("Hai inserito il numero " + numeroUtente);
+  }
+}
+
+// 4. In questa parte comunico all'utente il punteggio in base alle iterazioni, ossia alla length dell'Array NumeriValidi; stampo un alert appropriato a seconda dei punti fatti.
+
+var punteggio = numeriValidi.length;
+
+alert("Hai totalizzato " + punteggio + " punti.")
+console.log("Hai totalizzato " + punteggio + " punti.")
+console.log("I numeri che hai scelto sono stati: " + numeriValidi)
+
+// uso un else if per i commenti al punteggio.
+
+if (punteggio < (totaleNumeri - totaleBombe) * 0.20) {
   console.log("Hai totalizzato un punteggio basso; ritenta, sarai più fortunato.")
   alert("Hai totalizzato un punteggio basso; ritenta, sarai più fortunato.")
-} else if (punteggio == totaleNumeri - totaleNumeriBomba) {
+} else if (punteggio == totaleNumeri - totaleBombe) {
   console.log("INCREDIBILE! Hai totalizzato il massimo dei punti!!!")
   alert("INCREDIBILE! Hai totalizzato il massimo dei punti!!!")
 } else {
