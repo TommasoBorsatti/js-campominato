@@ -75,13 +75,13 @@ console.log("numeri bomba: " + numeriBomba);
 while (j < (totaleNumeri - totaleNumeriBomba) && !numeriBomba.includes(numeroUtente)) {
   numeroUtente = parseInt(prompt("inserisci qui un numero intero compreso tra 1 e " + totaleNumeri));
   //ciclo while che blocca il programma e il conteggio dei numeri se si inserisce o un NaN o un numero <= 0 o un numero superiore a 100.
-  while (isNaN(numeroUtente) || numeroUtente >= totaleNumeri || numeroUtente <= 0 ) {
+  while (isNaN(numeroUtente) || numeroUtente > totaleNumeri || numeroUtente <= 0 ) {
     numeroUtente = parseInt(prompt("Hei! Il valore inserito deve essere un numero e non può essere minore di 1 o maggiore di " + totaleNumeri));
   }
   // ciclo while che controlla che non si stia barando inserendo numeri già inseriti; il confronto avviene con il contenuto dell'array NumeriUsati.
   while (numeriUsati.includes(numeroUtente)) {
     numeroUtente = parseInt(prompt("Abbiamo un furbacchione qui...Per favore, inserisci solo numeri che non hai già inserito -_- "));
-    while (isNaN(numeroUtente) || numeroUtente >= totaleNumeri || numeroUtente <= 0 ) {
+    while (isNaN(numeroUtente) || numeroUtente > totaleNumeri || numeroUtente <= 0 ) {
       numeroUtente = parseInt(prompt("Hei! Il valore inserito deve essere un numero e non può essere minore di 1 o maggiore di " + totaleNumeri));
     }
   }
