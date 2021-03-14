@@ -87,13 +87,12 @@ while (numeriValidi.length < totaleNumeri - totaleBombe && esploso == false) {
   // primo controllo: se il numero inserito è uguale a un numero già usato, questo non viene pushato nell'array Numeri Validi.
   if (inArray(numeriValidi, numeroUtente)) {
     alert("Non fare il furbo: inserisci solo numeri che non hai già inserito.");
-  }
-  // secondo controllo: se il numero non rientra nei parametri accettati o è un NaN, questo non viene pushato nell'array Numeri Validi.
-  if (numeroUtente <= 0 || numeroUtente > totaleNumeri || isNaN(numeroUtente)) {
+  }  // secondo controllo: se il numero non rientra nei parametri accettati o è un NaN, questo non viene pushato nell'array Numeri Validi.
+   else if (numeroUtente <= 0 || numeroUtente > totaleNumeri || isNaN(numeroUtente)) {
     alert("Attenzione: inserisci solo un valore numerico compreso tra 1 e " + totaleNumeri);
   }
   // terzo controllo: se il numero rientra nell'array Bombe, la booleana Esploso da vero e il ciclo termina; ALTRIMENTI il numero è pushato nell'array Numeri Validi.
-  if (inArray(bombe, numeroUtente)) {
+   else if (inArray(bombe, numeroUtente)) {
     esploso = true;
     alert("BOOM! Sei saltato in aria e la tua partita termina qui.")
     console.log("Boom! Il numero " + numeroUtente + " era una bomba!")
